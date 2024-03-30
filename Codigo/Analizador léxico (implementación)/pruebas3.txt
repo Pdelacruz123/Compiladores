@@ -1,0 +1,12 @@
+def factorialIterativo(n):
+    ent resultado = 1;
+    por (ent i = 2; i <= n; i++) {
+        resultado *= i;
+    }
+    retornar resultado;
+}
+def main():
+    ent numero = 5;
+    imprimir << "La factorial de " << numero << " (iterativo) es: " << factorialIterativo(numero) << endl;
+    retornar 0;
+}

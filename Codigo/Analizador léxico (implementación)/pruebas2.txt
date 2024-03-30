@@ -1,0 +1,12 @@
+def factorialRecursivo(n):{
+    si (n <= 1) {
+        retornar 1;
+    }
+    retornar n * factorialRecursivo(n - 1);
+}
+def main():{
+    ent numero = 5;
+    imprimir << “La factorial de " << numero << " (recursivo) es: " <<
+    factorialRecursivo(numero) << endl;
+    retornar 0;
+}
