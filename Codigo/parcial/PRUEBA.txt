@@ -1,0 +1,16 @@
+DEF mifuncion(ENT x, FLOT y, BOOL z) 
+  MIENTRAS(true) 
+    SI(x>y || y<=x+y)
+      RETORNAR z*x
+    FINSI
+  FINMIENTRAS
+  
+  SI(x==y && mifuncion(x)) 
+    RETORNAR false
+  FINSI
+FINDEF
+
+MAIN()
+  ENT x=10
+  ENT y=nameFuncion(nameFuncion(x)+x,x,x)
+FINMAIN
