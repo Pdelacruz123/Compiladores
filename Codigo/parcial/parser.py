@@ -1,7 +1,6 @@
 import csv
 import re
 
-# ANALIZADOR SINTACTICO
 
 # Clasificación de símbolos en terminales y no terminales
 def clasificar_simbolos(reglas):
@@ -72,37 +71,39 @@ def obtener_primeros(reglas):
  return primeros
 
 # Cálculo de conjuntos FOLLOW
-
 def obtener_siguientes(reglas, primeros, simbolo_inicio):
-    siguientes = {no_terminal: set() for no_terminal in primeros}
-    siguientes[simbolo_inicio].add('$')
+siguientes = {no_terminal: set() for no_terminal in primeros}  #siguientes de cada no terminal
+siguientes[simbolo_inicio].add('$')  #símbolo de fin de cadena al FOLLOW del símbolo de inicio
 
-    cambio = True
-    while cambio:
-        cambio = False
-        for regla in reglas:
-            partes = regla.split('->')
-            if len(partes) < 2:
-                continue
-            izquierda = partes[0].strip()
-            derecha = partes[1].strip().split()
+cambio = True
+while cambio:
+    cambio = False
+    for regla in reglas:
+        izquierda, derecha = regla.split('->')
+        izquierda = izquierda.strip()
+        derecha = derecha.strip().split()
 
-            trailer = set(siguientes[izquierda])
-            for i in reversed(range(len(derecha))):
-                simbolo = derecha[i]
-                if simbolo in siguientes:
-                    antes_de_actualizar = len(siguientes[simbolo])
-                    siguientes[simbolo].update(trailer)
-                    if len(siguientes[simbolo]) > antes_de_actualizar:
-                        cambio = True
-                    if 'ε' in primeros.get(simbolo, set()):
-                        trailer.update(x for x in primeros[simbolo] if x != 'ε')
-                    else:
-                        trailer = set(primeros.get(simbolo, set()))
+        trailer = set(siguientes[izquierda])
+        for i in reversed(range(len(derecha))):
+            simbolo = derecha[i]
+            if simbolo in siguientes:
+                # Antes de actualizar los FOLLOW del símbolo, guarda su tamaño anterior para verificar cambios
+                antes_de_actualizar = len(siguientes[simbolo])
+                siguientes[simbolo].update(trailer)
+                #FOLLOW ha cambiado, marca que hubo un cambio y se necesita otra iteración
+                if len(siguientes[simbolo]) > antes_de_actualizar:
+                    cambio = True
+
+                # Actualiza el trailer para el próximo símbolo en la producción
+                if 'ε' in primeros[simbolo]:
+                    trailer.update(x for x in primeros[simbolo] if x != 'ε')
                 else:
-                    if simbolo != 'ε':
-                        trailer = {simbolo}
-    return {k: v for k, v in siguientes.items() if v}
+                    trailer = set(primeros[simbolo])
+            else:
+                if simbolo != 'ε':
+                    trailer = {simbolo}
+
+return {k: v for k, v in siguientes.items() if v}
 
 
 # Exportar tablas LL1, conjuntos FIRST y FOLLOW a archivos
