@@ -41,22 +41,22 @@ if '' in primeros:
     del primeros['']
 
 
-parser.escribir_conjuntos_archivo(primeros, 'first.txt', 'FIRST')
+parser.escribir_conjuntos_archivo(primeros, 'primeros.txt', 'FIRST')
 #info de los cjnts
 
-primeros_desde_archivo = parser.cargar_primeros('first.txt') #carga
+primeros_desde_archivo = parser.cargar_primeros('primeros.txt') #carga
 siguientes = parser.obtener_siguientes(reglas, primeros_desde_archivo, simbolo_inicio) #calc follow $ntrmnal
-parser.escribir_conjuntos_archivo(siguientes, 'follow.txt', 'FOLLOW') #info
+parser.escribir_conjuntos_archivo(siguientes, 'Siguientes.txt', 'FOLLOW') #info
 
-archivo_primeros = 'first.txt' #namefiles
-archivo_siguientes = 'follow.txt'
+archivo_primeros = 'primeros.txt' #namefiles
+archivo_siguientes = 'Siguientes.txt'
 
 reglas_T = parser.cargar_tabla_gramatica(archivo_gramatica)
 primeros_T = parser.cargar_conjuntos(archivo_primeros) #carga gram ->tabla
 siguientes_T = parser.cargar_conjuntos(archivo_siguientes)
 tabla_ll1 = parser.construir_tabla_ll1(reglas_T, primeros_T, siguientes_T)
 
-archivo_salida = 'll1_table.txt'
+archivo_salida = 'll1_table.txt' #tabla analisis, de gram
 parser.imprimir_tabla_ll1(tabla_ll1, archivo_salida) #ll1 escribe
 print(f"Tabla de análisis LL(1) escrita en {archivo_salida}")
 
