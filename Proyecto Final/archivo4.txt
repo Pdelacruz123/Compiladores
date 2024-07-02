@@ -1,0 +1,7 @@
+pug(){
+  numero x = 4 + 3
+  while (x <> 10){
+    x = x + 1
+    print (x)
+  }
+}

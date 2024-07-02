@@ -1,0 +1,7 @@
+charlie suma (){
+  devuelve 1 + 2
+}
+pug(){
+  entero x = suma()
+  print (x + 1)
+}

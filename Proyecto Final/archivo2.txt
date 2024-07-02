@@ -1,0 +1,14 @@
+pug(){
+entero x = 10
+entero y = 2
+entero z = 3
+si (x > 10) {
+    print(z)
+} sino {
+    si (x == 10) {
+        print(y)
+    } sino {
+        print(x)
+    }
+}
+}
