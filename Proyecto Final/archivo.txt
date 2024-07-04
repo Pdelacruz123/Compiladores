@@ -1,6 +1,0 @@
-pug(){
-numero x = 11
-numero y = 2 
-numero z = x * y + 2
-print (z)
-}

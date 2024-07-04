@@ -1,7 +1,0 @@
-charlie suma (entero x, entero y){
-  devuelve x + y
-}
-pug (){
-  entero resultado = suma (1,3) + 1
-  print(resultado)
-}
